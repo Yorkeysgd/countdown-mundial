@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Contador Mundial 2026</title>
+
+<style>
+@font-face {
+  font-family: 'DS-Digital';
+  src: url('fonts/ds-digital.ttf') format('truetype');
+}
+body {
+    margin: 0;
+    background-image: url('images/back.jpg');
+    background-size: cover;
+    font-family: 'DS-Digital', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    margin-top: 129px;
+}
+
+.days {
+    font-size: 421px;
+}
+
+.label-days {
+    font-size: 97px;
+    color: #ffffff;
+    margin-top: -20px;
+}
+
+.time {
+    margin-top: 80px;
+    font-size: 90px;
+    letter-spacing: 8px;
+}
+
+.label-time {
+    margin-top: 10px;
+    font-size: 28px;
+    letter-spacing: 4px;
+}
+
+.para {
+    margin-top: 246px;
+    font-weight: bold;
+    font-size: 78px;
+}
+
+.fifa-text {
+    font-size: 63px;
+    font-weight: bold;
+    margin-top: 43px;
+}
+
+
+/* ---------- DIVIDER ---------- */
+.divider {
+  width: 18px;
+  height: 223px;           /* DIVIDER MÁS LARGO */
+  background-color: white;
+  opacity: 0.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div id="days" class="days">000</div>
+    <div class="label-days">DÍAS</div>
+
+    <div class="para">PARA</div>
+    <div class="fifa-text">FIFA WORLD CUP 2026</div>
+
+
+</div>
+
+<script>
+const targetDate = new Date("June 11, 2026 00:00:00").getTime();
+
+function updateCounter() {
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+}
+
+updateCounter();
+setInterval(updateCounter, 1000);
+</script>
+
+</body>
+</html>
