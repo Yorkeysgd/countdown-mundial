@@ -1,101 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Contador Mundial 2026</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="3600" />
+  <title>Contador Mundial 2026</title>
 
-<style>
-@font-face {
-  font-family: 'DS-Digital';
-  src: url('fonts/ds-digital.ttf') format('truetype');
-}
-body {
-    margin: 0;
-    background-image: url('images/back.jpg');
-    background-size: cover;
-    font-family: 'DS-Digital', sans-serif;
-    color: white;
-    text-align: center;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
 
-.container {
-    margin-top: 129px;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-.days {
-    font-size: 421px;
-}
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
 
-.label-days {
-    font-size: 97px;
-    color: #ffffff;
-    margin-top: -20px;
-}
+    body {
+      background-image: url('back.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.time {
-    margin-top: 80px;
-    font-size: 90px;
-    letter-spacing: 8px;
-}
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 20, 90, 0.18);
+    }
 
-.label-time {
-    margin-top: 10px;
-    font-size: 28px;
-    letter-spacing: 4px;
-}
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1920px;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-.para {
-    margin-top: 246px;
-    font-weight: bold;
-    font-size: 78px;
-}
+    .days {
+      font-size: clamp(170px, 21vw, 420px);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: 4px;
+      text-shadow:
+        0 0 12px rgba(255,255,255,0.18),
+        0 0 30px rgba(255,255,255,0.08);
+    }
 
-.fifa-text {
-    font-size: 63px;
-    font-weight: bold;
-    margin-top: 43px;
-}
+    .label-days {
+      margin-top: 18px;
+      font-size: clamp(38px, 4vw, 92px);
+      font-weight: 500;
+      letter-spacing: 4px;
+    }
 
+    .para {
+      margin-top: 120px;
+      font-size: clamp(44px, 4.5vw, 78px);
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
 
-/* ---------- DIVIDER ---------- */
-.divider {
-  width: 18px;
-  height: 223px;           /* DIVIDER MÁS LARGO */
-  background-color: white;
-  opacity: 0.9;
-}
-</style>
+    .fifa-text {
+      margin-top: 24px;
+      font-size: clamp(28px, 3.3vw, 60px);
+      font-weight: 700;
+      letter-spacing: 2px;
+      max-width: 90%;
+      line-height: 1.1;
+    }
+
+    @media (max-width: 768px) {
+      .para {
+        margin-top: 80px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="overlay"></div>
 
-<div class="container">
+  <div class="container">
     <div id="days" class="days">000</div>
     <div class="label-days">DÍAS</div>
 
     <div class="para">PARA</div>
     <div class="fifa-text">FIFA WORLD CUP 2026</div>
+  </div>
 
+  <script>
+    const targetDate = new Date("2026-06-11T00:00:00").getTime();
 
-</div>
+    function updateCounter() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
 
-<script>
-const targetDate = new Date("June 11, 2026 00:00:00").getTime();
+      const days = Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24)));
+      document.getElementById("days").textContent = days;
+    }
 
-function updateCounter() {
-    const now = new Date().getTime();
-    const difference = targetDate - now;
-
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-    document.getElementById("days").innerHTML = days;
-    document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
-}
-
-updateCounter();
-setInterval(updateCounter, 1000);
-</script>
-
+    updateCounter();
+    setInterval(updateCounter, 1000);
+  </script>
 </body>
 </html>
